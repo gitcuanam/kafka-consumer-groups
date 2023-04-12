@@ -10,12 +10,14 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.RoundRobinAssignor;
+import org.apache.kafka.common.serialization.StringDeserializer;
 
 public class KafkaConsumerTest implements Runnable {
 
     private static final Logger LOGGER = Logger.getLogger(KafkaConsumerTest.class.getName());
-    private static final String TOPIC_NAME = "a-topic";
-    private static final String CONSUMER_GROUP = "a-group";
+    private static final String TOPIC_NAME = "test-topic";
+    private static final String CONSUMER_GROUP = "test-group";
     private final AtomicBoolean CONSUMER_STOPPED = new AtomicBoolean(false);
     private KafkaConsumer<String, String> consumer = null;
 
@@ -24,10 +26,11 @@ public class KafkaConsumerTest implements Runnable {
      */
     public KafkaConsumerTest() {
         Properties kafkaProps = new Properties();
-        kafkaProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        kafkaProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092");
         kafkaProps.put(ConsumerConfig.GROUP_ID_CONFIG, CONSUMER_GROUP);
-        kafkaProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-        kafkaProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        kafkaProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        kafkaProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        kafkaProps.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, RoundRobinAssignor.class.getName());
 
         this.consumer = new KafkaConsumer<>(kafkaProps);
     }

@@ -15,13 +15,13 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 public class KafkaProducerTest implements Runnable {
 
     private static final Logger LOGGER = Logger.getLogger(KafkaProducerTest.class.getName());
-    private static final String TOPIC_NAME = "a-topic";
+    private static final String TOPIC_NAME = "test-topic";
     private KafkaProducer<String, String> kafkaProducer = null;
     private final AtomicBoolean PRODUCER_STOPPED = new AtomicBoolean(false);
 
     public KafkaProducerTest() {
         Properties kafkaProps = new Properties();
-        kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092");
         kafkaProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
         kafkaProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
         kafkaProps.put(ProducerConfig.ACKS_CONFIG, "1");
