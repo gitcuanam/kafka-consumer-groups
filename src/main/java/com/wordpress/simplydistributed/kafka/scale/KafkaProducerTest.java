@@ -15,7 +15,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 public class KafkaProducerTest implements Runnable {
 
     private static final Logger LOGGER = Logger.getLogger(KafkaProducerTest.class.getName());
-    private static final String TOPIC_NAME = "a-topic";
+    private static final String TOPIC_NAME = "test-topic";
     private KafkaProducer<String, String> kafkaProducer = null;
     private final AtomicBoolean PRODUCER_STOPPED = new AtomicBoolean(false);
 

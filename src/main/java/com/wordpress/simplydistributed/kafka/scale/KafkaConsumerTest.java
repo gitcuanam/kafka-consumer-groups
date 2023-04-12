@@ -14,8 +14,8 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 public class KafkaConsumerTest implements Runnable {
 
     private static final Logger LOGGER = Logger.getLogger(KafkaConsumerTest.class.getName());
-    private static final String TOPIC_NAME = "a-topic";
-    private static final String CONSUMER_GROUP = "a-group";
+    private static final String TOPIC_NAME = "test-topic";
+    private static final String CONSUMER_GROUP = "test-group";
     private final AtomicBoolean CONSUMER_STOPPED = new AtomicBoolean(false);
     private KafkaConsumer<String, String> consumer = null;
 
