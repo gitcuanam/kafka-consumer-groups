@@ -30,7 +30,7 @@ replay_pid*
 
 # VSCode
 
-.vscode
+# .vscode
 .classpath
 .project
 .settings/
