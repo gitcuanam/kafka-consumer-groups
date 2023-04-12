@@ -1,5 +1,6 @@
 package com.wordpress.simplydistributed.kafka.scale;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -64,7 +65,8 @@ public class KafkaConsumerTest implements Runnable {
         try {
             while (!CONSUMER_STOPPED.get()) {
                 LOGGER.log(Level.INFO, "Polling broker");
-                ConsumerRecords<String, String> msg = consumer.poll(1000);
+                // https://stackoverflow.com/questions/59943786/kafka-what-are-the-better-alternatives-than-poll-to-listen-to-a-topic-in-jav
+                ConsumerRecords<String, String> msg = consumer.poll(Duration.ofMillis(1000));
                 for (ConsumerRecord<String, String> record : msg) {
                     LOGGER.log(Level.INFO, "Key: {0}", record.key());
                     LOGGER.log(Level.INFO, "Value: {0}", record.value());
